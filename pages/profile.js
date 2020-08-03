@@ -1,8 +1,9 @@
 
 import { getUserProfile } from '../lib/auth';
 import Layout from "../components/Layout";
+import  { authInitialProps } from '../lib/auth';
 
-export default function Profile() {
+export default function Profile(props) {
     const [user, setUser] = React.useState(null);
 
     React.useEffect(() => {
@@ -10,8 +11,10 @@ export default function Profile() {
     }, []);
 
     return (
-        <Layout title="Profile">
+        <Layout title="Profile" {...props}>
             <pre>{JSON.stringify(user, null, 2)}</pre>
         </Layout>
     )
 }
+
+Profile.getInitialProps = authInitialProps();

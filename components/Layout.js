@@ -1,14 +1,30 @@
 import Link from 'next/link';
+import { logoutUser } from '../lib/auth';
 
-const Layout = ({children, title}) => (
+const Layout = ({children, title, auth}) => {
+
+    const { user = {} } = auth || {};
+
+    
+    return (
     <div className="root">
         <nav className="navbar">
-            <span>Welcome, <strong>Guest</strong></span>
+            <span>Welcome, <strong>{user.name || 'Guest' }</strong></span>
             <div>
-                <Link href="/"><a>Home</a></Link>
-                <Link href="/profile"><a>Profile</a></Link>
-                <button>Logout</button>
-                <Link href="/profile"><a>Login</a></Link>
+            <Link href="/"><a>Home</a></Link>
+                {
+                    user.email ? (
+                        <>
+                            <Link href="/profile"><a>Profile</a></Link>
+                            <button onClick={logoutUser}>Logout</button>
+                        </>
+                    ) : (
+                        <Link href="/profile"><a>Login</a></Link>
+                    )
+                }
+               
+                
+                
             </div>
         </nav>
 
@@ -39,7 +55,7 @@ const Layout = ({children, title}) => (
                 border-style: none;
                 color: rgb(0, 0, 238);
             }`}</style>
-    </div>
-)
+    </div>)
+}
 
 export default Layout;
