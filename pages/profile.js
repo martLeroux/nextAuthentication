@@ -17,4 +17,4 @@ export default function Profile(props) {
     )
 }
 
-Profile.getInitialProps = authInitialProps();
+Profile.getInitialProps = authInitialProps(true);
