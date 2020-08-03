@@ -1,5 +1,6 @@
 
 import { getUserProfile } from '../lib/auth';
+import Layout from "../components/Layout";
 
 export default function Profile() {
     const [user, setUser] = React.useState(null);
@@ -9,6 +10,8 @@ export default function Profile() {
     }, []);
 
     return (
-        <pre>{JSON.stringify(user, null, 2)}</pre>
+        <Layout title="Profile">
+            <pre>{JSON.stringify(user, null, 2)}</pre>
+        </Layout>
     )
 }
